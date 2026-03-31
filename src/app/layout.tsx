@@ -5,7 +5,10 @@ export const metadata: Metadata = {
   title: "TVG2 - 番組表ビューア",
   description: "地上波・BS・CSの番組表ビューア",
   icons: {
-    icon: "/favicon.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.png", type: "image/png" },
+    ],
     apple: "/icon-192.png",
   },
   manifest: "/manifest.json",
