@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e3a5f"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="24" fill="url(#bg)"/>
+  <!-- TV screen shape -->
+  <rect x="18" y="24" width="92" height="64" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="3"/>
+  <!-- Screen glow -->
+  <rect x="24" y="30" width="80" height="52" rx="4" fill="#0f172a"/>
+  <!-- EPG grid lines -->
+  <line x1="24" y1="46" x2="104" y2="46" stroke="#334155" stroke-width="1"/>
+  <line x1="24" y1="62" x2="104" y2="62" stroke="#334155" stroke-width="1"/>
+  <line x1="50" y1="30" x2="50" y2="82" stroke="#334155" stroke-width="1"/>
+  <line x1="77" y1="30" x2="77" y2="82" stroke="#334155" stroke-width="1"/>
+  <!-- Colored program blocks -->
+  <rect x="26" y="32" width="22" height="12" rx="2" fill="#3b82f6" opacity="0.7"/>
+  <rect x="52" y="32" width="23" height="12" rx="2" fill="#f97316" opacity="0.7"/>
+  <rect x="79" y="32" width="23" height="12" rx="2" fill="#22c55e" opacity="0.7"/>
+  <rect x="26" y="48" width="22" height="12" rx="2" fill="#ec4899" opacity="0.7"/>
+  <rect x="52" y="48" width="23" height="28" rx="2" fill="#3b82f6" opacity="0.5"/>
+  <rect x="79" y="48" width="23" height="12" rx="2" fill="#a855f7" opacity="0.7"/>
+  <rect x="26" y="64" width="22" height="16" rx="2" fill="#06b6d4" opacity="0.7"/>
+  <rect x="79" y="64" width="23" height="16" rx="2" fill="#f97316" opacity="0.7"/>
+  <!-- TV stand -->
+  <rect x="44" y="90" width="40" height="4" rx="2" fill="#475569"/>
+  <!-- Text "TVG" -->
+  <text x="64" y="118" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="20" fill="#60a5fa">TVG</text>
+</svg>

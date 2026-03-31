@@ -4,6 +4,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "TVG2 - 番組表ビューア",
   description: "地上波・BS・CSの番組表ビューア",
+  icons: {
+    icon: "/favicon.png",
+    apple: "/icon-192.png",
+  },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
