@@ -142,22 +142,22 @@ export function parseEpgPage(html: string): { channels: ScrapedChannel[]; progra
     });
   }
 
-  // Find content div with ULs
-  let contentDiv: cheerio.Cheerio<cheerio.Element> | null = null;
+  // Collect program ULs — skip colDivs that contain channel list or time column
+  // Program ULs contain LIs with "s" (start epoch) attribute
+  const allUls: cheerio.Cheerio<cheerio.Element>[] = [];
   colDivs.each((_, el) => {
-    const uls = $(el).children("ul");
-    if (uls.length >= result.channels.length && !contentDiv) {
-      contentDiv = $(el);
-    }
+    $(el).children("ul").each((_, ul) => {
+      // Check if this UL contains program data (LIs with "s" attribute)
+      const firstLi = $(ul).children("li").first();
+      if (firstLi.attr("s") !== undefined) {
+        allUls.push($(ul));
+      }
+    });
   });
-  if (!contentDiv) {
-    contentDiv = colDivs.length > 0 ? colDivs.last() : null;
-  }
-  if (!contentDiv) return result;
 
-  (contentDiv as cheerio.Cheerio<cheerio.Element>).children("ul").each((chIdx, ul) => {
+  allUls.forEach((ul, chIdx) => {
     const progs: ScrapedProgram[] = [];
-    $(ul).children("li").each((_, li) => {
+    ul.children("li").each((_, li) => {
       const $li = $(li);
       const startEpoch = $li.attr("s") || "";
       const endEpoch = $li.attr("e") || "";

@@ -17,8 +17,8 @@ export async function scrapeAndStore(broadcastType: string, dateStr: string) {
   const channelIdMap: Record<number, number> = {};
   for (const ch of data.channels) {
     const rows = db.exec(
-      "SELECT id FROM channels WHERE broadcast_type = ? AND channel_name = ?",
-      [broadcastType, ch.name]
+      "SELECT id FROM channels WHERE broadcast_type = ? AND channel_name = ? AND channel_number = ?",
+      [broadcastType, ch.name, ch.number]
     );
     if (rows.length > 0 && rows[0].values.length > 0) {
       channelIdMap[ch.index] = rows[0].values[0][0] as number;

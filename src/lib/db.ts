@@ -41,7 +41,7 @@ export async function initDb(): Promise<Database> {
       sort_order INTEGER NOT NULL DEFAULT 0,
       visible INTEGER NOT NULL DEFAULT 1,
       is_favorite INTEGER NOT NULL DEFAULT 0,
-      UNIQUE(broadcast_type, channel_name)
+      UNIQUE(broadcast_type, channel_name, channel_number)
     )
   `);
 
