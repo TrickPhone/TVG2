@@ -359,7 +359,7 @@ function todayStr() {
 }
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<TabKey>("td");
+  const [activeTab, setActiveTab] = useState<TabKey>("my");
   const [dates, setDates] = useState<DateInfo[]>([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [chs, setChs] = useState<ChannelRow[]>([]);
