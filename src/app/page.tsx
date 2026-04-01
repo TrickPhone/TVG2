@@ -192,10 +192,12 @@ function MyChannelGrid({
   channels,
   programs,
   onReorderChannels,
+  navHeight,
 }: {
   channels: ChannelRow[];
   programs: Record<string, ProgramRow[]>;
   onReorderChannels: (ids: number[]) => void;
+  navHeight: number;
 }) {
   const [orderedChannels, setOrderedChannels] = useState(channels);
   const dragChannelIdx = useRef<number | null>(null);
@@ -252,7 +254,7 @@ function MyChannelGrid({
 
   return (
     <div className="epg-wrapper">
-      <div className="sticky top-14 z-30 flex bg-gray-900 border-b border-gray-600/50">
+      <div className="sticky z-30 flex bg-gray-900 border-b border-gray-600/50" style={{ top: navHeight }}>
         <div className="shrink-0 w-[50px] bg-gray-900 border-r border-gray-600/50 flex items-center justify-center h-12">
           <span className="text-lg text-gray-500">時刻</span>
         </div>
@@ -362,6 +364,8 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<TabKey>("my");
   const [dates, setDates] = useState<DateInfo[]>([]);
   const [selectedDate, setSelectedDate] = useState("");
+  const navRef = useRef<HTMLDivElement>(null);
+  const [navHeight, setNavHeight] = useState(0);
   const [chs, setChs] = useState<ChannelRow[]>([]);
   const [progs, setProgs] = useState<Record<string, ProgramRow[]>>({});
   const [myChs, setMyChs] = useState<ChannelRow[]>([]);
@@ -373,6 +377,17 @@ export default function Home() {
   const [genreFilter, setGenreFilter] = useState("");
   const [needsScroll, setNeedsScroll] = useState(false);
   const initialLoadDone = useRef(false);
+
+  // Measure nav height for sticky offsets
+  useEffect(() => {
+    if (!navRef.current) return;
+    const ro = new ResizeObserver(() => {
+      setNavHeight(navRef.current?.offsetHeight || 0);
+    });
+    ro.observe(navRef.current);
+    setNavHeight(navRef.current.offsetHeight);
+    return () => ro.disconnect();
+  }, []);
 
   // Load dates
   useEffect(() => {
@@ -480,7 +495,7 @@ export default function Home() {
   return (
     <div className="max-w-[1800px] mx-auto px-4 py-4">
       {/* Nav header + Controls — sticky */}
-      <div className="sticky top-0 z-20 bg-[var(--background)] pb-2">
+      <div ref={navRef} className="sticky top-0 z-20 bg-[var(--background)] pb-2">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <span className="text-2xl font-bold text-blue-400">TVG</span>
@@ -587,7 +602,7 @@ export default function Home() {
         loading ? (
           <div className="flex items-center justify-center py-20"><div className="text-gray-500 text-lg">読み込み中...</div></div>
         ) : (
-          <MyChannelGrid channels={myChs} programs={myProgs} onReorderChannels={reorderFavoriteChannels} />
+          <MyChannelGrid channels={myChs} programs={myProgs} onReorderChannels={reorderFavoriteChannels} navHeight={navHeight} />
         )
       )}
 
